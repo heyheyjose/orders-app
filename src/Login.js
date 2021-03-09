@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 import { updateAuth } from './state/actions';
 import AppHeader from './components/Header';
+import Footer from './components/Footer';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -37,7 +38,7 @@ function Login() {
   return (
     <Container fluid className="app-wrapper">
       <AppHeader title="Login" />
-      <Container fluid className="app-content">
+      <div className="app-content">
         <form onSubmit={handleLogin}>
           <div className="user-box">
           <label htmlFor="username">Username</label>
@@ -62,7 +63,8 @@ function Login() {
           </div>
           <input type="submit" value="Submit" />
         </form>
-      </Container>
+      </div>
+      <Footer />
     </Container>
   );
 }

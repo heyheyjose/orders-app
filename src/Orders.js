@@ -30,10 +30,10 @@ class Orders extends Component {
     this.logout = this.logout.bind(this);
   }
 
-  // componentDidMount() {
-  //   const { actions } = this.props;
-  //   actions.fetchOrders();
-  // }
+  componentDidMount() {
+    const { actions } = this.props;
+    actions.fetchOrders();
+  }
 
   componentDidUpdate(prevProps) {
     const { orders } = this.props;
