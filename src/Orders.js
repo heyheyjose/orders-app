@@ -2,7 +2,7 @@ import { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
-import { Container } from 'semantic-ui-react';
+import { Container, Table } from 'semantic-ui-react';
 import { displayRowClass, displayOrderStatus } from './utilities';
 import { fetchOrders } from './state/actions';
 import AppHeader from './components/Header';
@@ -110,6 +110,42 @@ class Orders extends Component {
             </div>
             <button onClick={this.handleFilter}>Filter</button>
           </div>
+
+          <Table celled fixed singleLine>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Order Number</Table.HeaderCell>
+                <Table.HeaderCell>Order Date</Table.HeaderCell>
+                <Table.HeaderCell>Order Status</Table.HeaderCell>
+                <Table.HeaderCell>Scheduled Date Time</Table.HeaderCell>
+                <Table.HeaderCell>Delivered Date Time</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+
+            <Table.Body>
+              {tableState.length > 0 ? tableState.map(order => {
+                const {
+                  orderNumber,
+                  orderDate,
+                  orderStatus,
+                  scheduledDateTime,
+                  deliveredDateTime
+                } = order;
+
+                return (
+                  <Table.Row key={orderNumber} className={displayRowClass(scheduledDateTime, deliveredDateTime)}>
+                    <Table.Cell>{orderNumber}</Table.Cell>
+                    <Table.Cell>{moment(orderDate).format(dateDisplay)}</Table.Cell>
+                    <Table.Cell>{displayOrderStatus(orderStatus)}</Table.Cell>
+                    <Table.Cell>{moment(scheduledDateTime).format(dateDisplay)}</Table.Cell>
+                    <Table.Cell>
+                      {deliveredDateTime ? moment(deliveredDateTime).format(dateDisplay) : 'In Transit'}
+                    </Table.Cell>
+                  </Table.Row>
+                );
+              }) : <Table.Row><Table.Cell colSpan={5} className="no-orders">No Orders Found</Table.Cell></Table.Row>}
+            </Table.Body>
+          </Table>
     
           <table>
             <thead>
