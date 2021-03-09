@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Container } from 'semantic-ui-react';
+import { Container, Form, Button, Checkbox } from 'semantic-ui-react';
 import { updateAuth } from './state/actions';
 import AppHeader from './components/Header';
 import Footer from './components/Footer';
@@ -38,31 +38,32 @@ function Login() {
   return (
     <Container fluid className="app-wrapper">
       <AppHeader title="Login" />
-      <div className="app-content">
-        <form onSubmit={handleLogin}>
-          <div className="user-box">
-          <label htmlFor="username">Username</label>
+      <div className="app-content login-wrapper">
+        <Form onSubmit={handleLogin} className="login-form">
+          <Form.Field>
             <input
               type="email"
-              name="username"
+              placeholder="Username"
               required
               onChange={handleUsername}
               value={username}
             />
-          </div>
-          <div className="user-box">
-          <label htmlFor="password">Password</label>
+          </Form.Field>
+          <Form.Field>
             <input
               type="password"
-              name="password"
+              placeholder="Password"
               minLength="8"
               required
               onChange={handlePassword}
               value={password}
             />
-          </div>
-          <input type="submit" value="Submit" />
-        </form>
+          </Form.Field>
+          <Form.Field>
+            <Checkbox label="I agree to the Terms and Conditions" />
+          </Form.Field>
+          <Button primary type="submit">Submit</Button>
+        </Form>
       </div>
       <Footer />
     </Container>

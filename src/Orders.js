@@ -35,9 +35,10 @@ class Orders extends Component {
     actions.fetchOrders();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const { orders } = this.props;
-    if (prevProps.orders.length !== orders.length) {
+
+    if (prevState.tableState.length !== orders.length) {
       this.setState({ initialTableState: orders, tableState: orders });
     }
   }
@@ -151,7 +152,7 @@ class Orders extends Component {
             </Table.Body>
           </Table>
 
-          <Button style={{ marginBottom: 14 }} secondary onClick={this.resetFilter}>Reset Filter</Button>
+          <Button style={{ marginBottom: 14 }} secondary onClick={this.resetFilter}>Reset Results</Button>
         </div>
         <Footer />
       </Container>

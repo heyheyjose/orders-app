@@ -1,7 +1,3 @@
-body {
-  /* height: 100%; */
-}
-
 .app-wrapper {
   position: relative;
   min-height: 100vh;
@@ -12,12 +8,8 @@ body {
 
 .ui.app-header {
   height: 100px;
-  background-color: #2736778c; /* #bf232e */
+  background-color: #2736778c;
   border-radius: 0;
-}
-
-.ui.app-header-text-color {
-  /* color: #fff; */
 }
 
 .user-avatar {
@@ -35,9 +27,22 @@ body {
 }
 
 .app-content {
-  /* min-height: 100%; */
-  /* margin-bottom: -50px; */
   padding: 0 15px;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 4px;
+  width: 25%;
+  display: inline-block;
+  padding: 30px 20px;
+  margin: 35px;
 }
 
 .green {
@@ -56,12 +61,8 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* left: 0; */
-  /* right: 0; */
   height: 110px;
-  /* background-color: #273677; */
   background-color: #bf232d69;
-  /* color: #fff; */
   padding: 30px;
 }
 
@@ -70,22 +71,15 @@ body {
 .contact {
   display: inline-block;
   width: 33%;
-  /* height: 100%; */
   text-align: center;
 }
 
 .about {
-  /* background-color: #bf232d69; */
   border-right: 1px solid;
 }
 
 .social {
-  /* background-color: chartreuse; */
   border-right: 1px solid;
-}
-
-.contact {
-  /* background-color: blueviolet; */
 }
 
 @media only screen and (max-width: 1024px) {
@@ -93,8 +87,8 @@ body {
     padding-bottom: 270px;
   }
 
-  .app-content {
-    /* overflow-y: scroll; */
+  .login-form {
+    width: 50%;
   }
 
   .about,
@@ -119,5 +113,9 @@ body {
 @media only screen and (max-width: 767px) {
   .ui.container {
     margin: 0 !important;
+  }
+
+  .login-form {
+    width: 100%;
   }
 }
