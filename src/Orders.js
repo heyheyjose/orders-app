@@ -2,8 +2,8 @@ import { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
-import { Container, Table } from 'semantic-ui-react';
-import { displayRowClass, displayOrderStatus } from './utilities';
+import { Container, Table, Dropdown, Button, Input } from 'semantic-ui-react';
+import { displayRowClass, displayOrderStatus, FILTER_OPTIONS } from './utilities';
 import { fetchOrders } from './state/actions';
 import AppHeader from './components/Header';
 import Avatar from './components/Avatar';
@@ -46,8 +46,8 @@ class Orders extends Component {
     this.setState({ orderNumberFilterInput: e.target.value });
   }
 
-  setStatus(e) {
-    this.setState({ statusFilter: e.target.value });
+  setStatus(e, data) {
+    this.setState({ statusFilter: data.value });
   }
 
   handleFilter() {
@@ -62,7 +62,10 @@ class Orders extends Component {
     if (statusFilter.length > 0) {
       // filter again (or for the first time)
       this.setState(state => {
-        return { tableState: state.tableState.filter(row => row.orderStatus === statusFilter) };
+        return {
+          tableState: state.tableState.filter(row => row.orderStatus === statusFilter),
+          statusFilter: '',
+        };
       });
     }
   }
@@ -91,24 +94,25 @@ class Orders extends Component {
           )}
         />
         <div className="app-content">
-          <div style={{ marginBottom: 25 }}>
-            <p>Filter Order Results:</p>
-            <div style={{ marginBottom: 5 }}>
-              <input
-                type="text"
-                placeholder="Order #"
-                value={orderNumberFilterInput}
-                onChange={this.setOrderNumber}
-              />
-            </div>
-            <div style={{ marginBottom: 5 }}>
-              <select onChange={this.setStatus}>
-                <option value="">Choose a status</option>
-                <option value="A">Active</option>
-                <option value="C">Completed</option>
-              </select>
-            </div>
-            <button onClick={this.handleFilter}>Filter</button>
+          <p>Filter Order Results:</p>
+          <div>
+            <Input
+              placeholder="Order #"
+              value={orderNumberFilterInput}
+              onChange={this.setOrderNumber}
+            />
+          </div>
+          <div style={{ marginTop: 14 }}>
+            <Dropdown
+              placeholder="Choose a status"
+              clearable
+              selection
+              options={FILTER_OPTIONS}
+              onChange={this.setStatus}
+            />
+          </div>
+          <div style={{ marginTop: 14 }}>
+            <Button primary onClick={this.handleFilter}>Filter</Button>
           </div>
 
           <Table celled fixed singleLine>
@@ -146,45 +150,8 @@ class Orders extends Component {
               }) : <Table.Row><Table.Cell colSpan={5} className="no-orders">No Orders Found</Table.Cell></Table.Row>}
             </Table.Body>
           </Table>
-    
-          <table>
-            <thead>
-              <tr>
-                <th>Order Number</th>
-                <th>Order Date</th>
-                <th>Order Status</th>
-                <th>Scheduled Date Time</th>
-                <th>Delivered Date Time</th>
-              </tr>
-            </thead>
 
-            <tbody>
-              {tableState.length > 0 ? tableState.map(order => {
-                const {
-                  orderNumber,
-                  orderDate,
-                  orderStatus,
-                  scheduledDateTime,
-                  deliveredDateTime
-                } = order;
-
-                return (
-                  <tr key={orderNumber} className={displayRowClass(scheduledDateTime, deliveredDateTime)}>
-                    <td>{orderNumber}</td>
-                    <td>{moment(orderDate).format(dateDisplay)}</td>
-                    <td>{displayOrderStatus(orderStatus)}</td>
-                    <td>{moment(scheduledDateTime).format(dateDisplay)}</td>
-                    <td>{deliveredDateTime ? moment(deliveredDateTime).format(dateDisplay) : 'In Transit'}</td>
-                  </tr>
-                );
-              }) : <tr><td colSpan={5}>No Orders Found</td></tr>}
-            </tbody>
-          </table>
-            
-          <div className="wrap">
-            <button onClick={this.resetFilter}>Reset Filter</button>
-            <button className="right" onClick={this.logout}>Log Out</button>
-          </div>
+          <Button style={{ marginBottom: 14 }} secondary onClick={this.resetFilter}>Reset Filter</Button>
         </div>
         <Footer />
       </Container>

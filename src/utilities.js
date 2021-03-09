@@ -29,3 +29,8 @@ export function displayRowClass(expectedTime, actualTime) {
 
   return className;
 }
+
+export const FILTER_OPTIONS = [
+  { key: 1, text: 'Active', value: 'A' },
+  { key: 2, text: 'Completed', value: 'C' },
+];
