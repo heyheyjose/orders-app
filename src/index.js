@@ -3,8 +3,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router/immutable';
-import configureStore, { history } from './state/configureStore';
+
+import 'semantic-ui-css/semantic.min.css';
 import './index.css';
+
+import configureStore, { history } from './state/configureStore';
 import Login from './Login';
 import Orders from './Orders';
 

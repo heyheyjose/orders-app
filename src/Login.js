@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Container } from 'semantic-ui-react';
 import { updateAuth } from './state/actions';
-import './App.css';
+import AppHeader from './components/Header';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -34,8 +35,9 @@ function Login() {
   };
 
   return (
-    <div className="login-box">
-        <h2>Login</h2>
+    <Container fluid className="app-wrapper">
+      <AppHeader title="Login" />
+      <Container fluid className="app-content">
         <form onSubmit={handleLogin}>
           <div className="user-box">
           <label htmlFor="username">Username</label>
@@ -60,7 +62,8 @@ function Login() {
           </div>
           <input type="submit" value="Submit" />
         </form>
-    </div>
+      </Container>
+    </Container>
   );
 }
 
