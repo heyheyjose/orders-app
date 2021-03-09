@@ -3,7 +3,11 @@ body {
 }
 
 .app-wrapper {
-  /* position: relative; */
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: block;
+  padding-bottom: 110px;
 }
 
 .ui.app-header {
@@ -33,6 +37,19 @@ body {
 .app-content {
   /* min-height: 100%; */
   /* margin-bottom: -50px; */
+  padding: 0 15px;
+}
+
+.green {
+  background-color: rgba(3, 165, 3, 0.582);
+}
+
+.red {
+  background-color: rgba(216, 10, 10, 0.712);
+}
+
+.ui.table td.no-orders {
+  text-align: center;
 }
 
 .app-footer {
@@ -72,6 +89,14 @@ body {
 }
 
 @media only screen and (max-width: 1024px) {
+  .app-wrapper {
+    padding-bottom: 270px;
+  }
+
+  .app-content {
+    /* overflow-y: scroll; */
+  }
+
   .about,
   .social,
   .contact {
